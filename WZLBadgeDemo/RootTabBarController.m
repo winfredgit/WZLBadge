@@ -48,7 +48,7 @@
     UITabBarItem *firstItem = self.tabBar.items.firstObject;
     //it is necessary to adjust badge position
     firstItem.badgeCenterOffset = CGPointMake(0, 0);
-    [firstItem showBadgeWithStyle:WBadgeStyleNew value:0 animationType:WBadgeAnimTypeShake];
+    [firstItem showBadgeWithStyle:WBadgeStyleText value:@"new" animationType:WBadgeAnimTypeShake];
 }
 
 - (void)setupNaviBarItems

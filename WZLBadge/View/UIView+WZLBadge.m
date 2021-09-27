@@ -10,12 +10,9 @@
 #import <objc/runtime.h>
 #import "CAAnimation+WAnimation.h"
 
-#define kWZLBadgeDefaultFont				([UIFont boldSystemFontOfSize:9])
+#define kWZLBadgeDefaultFont                ([UIFont boldSystemFontOfSize:9])
 
 #define kWZLBadgeDefaultMaximumBadgeNumber                     99
-
-
-static const CGFloat kWZLBadgeDefaultRedDotRadius = 4.f;
 
 @implementation UIView (WZLBadge)
 
@@ -32,10 +29,10 @@ static const CGFloat kWZLBadgeDefaultRedDotRadius = 4.f;
  *  showBadge
  *
  *  @param style WBadgeStyle type
- *  @param value (if 'style' is WBadgeStyleRedDot or WBadgeStyleNew, 
+ *  @param value (if 'style' is WBadgeStyleRedDot or WBadgeStyleNew,
  *                this value will be ignored. In this case, any value will be ok.)
  */
-- (void)showBadgeWithStyle:(WBadgeStyle)style value:(NSInteger)value animationType:(WBadgeAnimType)aniType
+- (void)showBadgeWithStyle:(WBadgeStyle)style value:(id)value animationType:(WBadgeAnimType)aniType
 {
     self.aniType = aniType;
     switch (style) {
@@ -43,23 +40,14 @@ static const CGFloat kWZLBadgeDefaultRedDotRadius = 4.f;
             [self showRedDotBadge];
             break;
         case WBadgeStyleNumber:
-            [self showNumberBadgeWithValue:value];
+            [self showNumberBadgeWithValue:[value integerValue]];
             break;
-        case WBadgeStyleNew:
-            [self showNewBadge];
+        case WBadgeStyleText:
+            [self showTextBadgeWithValue:value];
             break;
         default:
             break;
     }
-    if (aniType != WBadgeAnimTypeNone) {
-        [self beginAnimation];
-    }
-}
-
-- (void)showNumberBadgeWithValue:(NSInteger)value animationType:(WBadgeAnimType)aniType {
-    self.aniType = aniType;
-    [self showNumberBadgeWithValue:value];
-    
     if (aniType != WBadgeAnimTypeNone) {
         [self beginAnimation];
     }
@@ -87,40 +75,34 @@ static const CGFloat kWZLBadgeDefaultRedDotRadius = 4.f;
 - (void)showRedDotBadge
 {
     [self badgeInit];
-    //if badge has been displayed and, in addition, is was not red dot style, we must update UI.
-    if (self.badge.tag != WBadgeStyleRedDot) {
-        self.badge.text = @"";
-        self.badge.tag = WBadgeStyleRedDot;
-        [self resetBadgeForRedDot];
-        self.badge.layer.cornerRadius = CGRectGetWidth(self.badge.frame) / 2;
+    self.badge.tag = WBadgeStyleRedDot;
+    self.badge.text = @"";
+    self.badge.layer.cornerRadius = CGRectGetWidth(self.badge.frame) / 2;
+    CGRect frame = self.badge.frame;
+    if(CGRectGetWidth(frame) < CGRectGetHeight(frame)) {
+        frame.size.width = CGRectGetHeight(frame);
     }
+    frame.origin.x = CGRectGetWidth(self.frame) - frame.size.width;
+    frame.origin.y = 0;
+    self.badge.frame = frame;
     self.badge.hidden = NO;
 }
 
-- (void)resetBadgeForRedDot {
-    if (self.badgeRadius > 0) {
-        self.badge.frame = CGRectMake(self.badge.center.x - self.badgeRadius, self.badge.center.y + self.badgeRadius , self.badgeRadius * 2, self.badgeRadius *2);
-    }
-}
-
-- (void)showNewBadge
+- (void)showTextBadgeWithValue:(NSString *)value
 {
     [self badgeInit];
-    //if badge has been displayed and, in addition, is not red dot style, we must update UI.
-    if (self.badge.tag != WBadgeStyleNew) {
-        self.badge.text = @"new";
-        self.badge.tag = WBadgeStyleNew;
-        
-        CGRect frame = self.badge.frame;
-        frame.size.width = 22;
-        frame.size.height = 13;
-        self.badge.frame = frame;
-        
-        self.badge.center = CGPointMake(CGRectGetWidth(self.frame) + 2 + self.badgeCenterOffset.x, self.badgeCenterOffset.y);
-        self.badge.font = kWZLBadgeDefaultFont;
-        self.badge.layer.cornerRadius = CGRectGetHeight(self.badge.frame) / 3;
+    self.badge.hidden = (value.length == 0);
+    self.badge.tag = WBadgeStyleText;
+    self.badge.font = self.badgeFont;
+    self.badge.text = value;
+    self.badge.layer.cornerRadius = CGRectGetHeight(self.badge.frame) / 2;
+    CGRect frame = self.badge.frame;
+    if(CGRectGetWidth(frame) < CGRectGetHeight(frame)) {
+        frame.size.width = CGRectGetHeight(frame);
     }
-    self.badge.hidden = NO;
+    frame.origin.x = CGRectGetWidth(self.frame) - frame.size.width;
+    frame.origin.y = 0;
+    self.badge.frame = frame;
 }
 
 - (void)showNumberBadgeWithValue:(NSInteger)value
@@ -129,22 +111,20 @@ static const CGFloat kWZLBadgeDefaultRedDotRadius = 4.f;
         return;
     }
     [self badgeInit];
-    self.badge.hidden = (value == 0);
+    self.badge.hidden = value == 0;
     self.badge.tag = WBadgeStyleNumber;
     self.badge.font = self.badgeFont;
     self.badge.text = (value > self.badgeMaximumBadgeNumber ?
                        [NSString stringWithFormat:@"%@+", @(self.badgeMaximumBadgeNumber)] :
                        [NSString stringWithFormat:@"%@", @(value)]);
-    [self adjustLabelWidth:self.badge];
-    CGRect frame = self.badge.frame;
-    frame.size.width += 4;
-    frame.size.height += 4;
-    if(CGRectGetWidth(frame) < CGRectGetHeight(frame)) {
-        frame.size.width = CGRectGetHeight(frame);
-    }
-    self.badge.frame = frame;
-    self.badge.center = CGPointMake(CGRectGetWidth(self.frame) + 2 + self.badgeCenterOffset.x, self.badgeCenterOffset.y);
-    self.badge.layer.cornerRadius = CGRectGetHeight(self.badge.frame) / 2;
+    self.badge.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleBottomMargin;
+    const CGSize fitSize = [self.badge sizeThatFits:CGSizeMake(12, 12)];
+    const CGFloat badgeWidth = fitSize.width + 8;
+    const CGFloat badgeHeight = fitSize.height + 4;
+    self.badge.layer.cornerRadius = badgeHeight / 2.0;
+    const CGFloat x = CGRectGetWidth(self.frame) - (badgeWidth / 2.0);
+    const CGFloat y = -(badgeHeight / 2.0);
+    self.badge.frame = CGRectMake(x, y, MAX(badgeWidth, badgeHeight), badgeHeight);
 }
 
 //lazy loading
@@ -158,7 +138,7 @@ static const CGFloat kWZLBadgeDefaultRedDotRadius = 4.f;
     }
     
     if (nil == self.badge) {
-        CGFloat redotWidth = kWZLBadgeDefaultRedDotRadius *2;
+        CGFloat redotWidth = 8;
         CGRect frm = CGRectMake(CGRectGetWidth(self.frame), -redotWidth, redotWidth, redotWidth);
         self.badge = [[UILabel alloc] initWithFrame:frm];
         self.badge.textAlignment = NSTextAlignmentCenter;
@@ -182,25 +162,25 @@ static const CGFloat kWZLBadgeDefaultRedDotRadius = 4.f;
     NSString *s = label.text;
     UIFont *font = [label font];
     CGSize size = CGSizeMake(320,2000);
-	CGSize labelsize;
+    CGSize labelsize;
 
-	if (![s respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
+    if (![s respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-		labelsize = [s sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+        labelsize = [s sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
 #pragma clang diagnostic pop
-		
-	} else {
-		NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-		[style setLineBreakMode:NSLineBreakByWordWrapping];
-		
-		labelsize = [s boundingRectWithSize:size
-									options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-								 attributes:@{ NSFontAttributeName:font, NSParagraphStyleAttributeName : style}
-									context:nil].size;
-	}
+        
+    } else {
+        NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        [style setLineBreakMode:NSLineBreakByWordWrapping];
+        
+        labelsize = [s boundingRectWithSize:size
+                                    options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                                 attributes:@{ NSFontAttributeName:font, NSParagraphStyleAttributeName : style}
+                                    context:nil].size;
+    }
     CGRect frame = label.frame;
-	frame.size = CGSizeMake(ceilf(labelsize.width), ceilf(labelsize.height));
+    frame.size = CGSizeMake(ceilf(labelsize.width), ceilf(labelsize.height));
     [label setFrame:frame];
 }
 
@@ -264,13 +244,13 @@ static const CGFloat kWZLBadgeDefaultRedDotRadius = 4.f;
 
 - (UIFont *)badgeFont
 {
-	id font = objc_getAssociatedObject(self, &badgeFontKey);
-	return font == nil ? kWZLBadgeDefaultFont : font;
+    id font = objc_getAssociatedObject(self, &badgeFontKey);
+    return font == nil ? kWZLBadgeDefaultFont : font;
 }
 
 - (void)setBadgeFont:(UIFont *)badgeFont
 {
-	objc_setAssociatedObject(self, &badgeFontKey, badgeFont, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, &badgeFontKey, badgeFont, OBJC_ASSOCIATION_RETAIN);
     if (!self.badge) {
         [self badgeInit];
     }
@@ -370,19 +350,6 @@ static const CGFloat kWZLBadgeDefaultRedDotRadius = 4.f;
         [self badgeInit];
     }
     self.badge.center = CGPointMake(CGRectGetWidth(self.frame) + 2 + badgeCenterOff.x, badgeCenterOff.y);
-}
-
-//badgeRadiusKey
-
-- (void)setBadgeRadius:(CGFloat)badgeRadius {
-    objc_setAssociatedObject(self, &badgeRadiusKey, [NSNumber numberWithFloat:badgeRadius], OBJC_ASSOCIATION_RETAIN);
-    if (!self.badge) {
-        [self badgeInit];
-    }
-}
-
-- (CGFloat)badgeRadius {
-    return [objc_getAssociatedObject(self, &badgeRadiusKey) floatValue];
 }
 
 - (NSInteger)badgeMaximumBadgeNumber {

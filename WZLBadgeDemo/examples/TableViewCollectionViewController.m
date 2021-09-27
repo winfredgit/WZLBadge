@@ -57,20 +57,19 @@ static NSInteger const numberOfAStyle = 3;
     switch (indexPath.row%numberOfAStyle) {
         case WBadgeStyleRedDot:
         {
-            cell.contentView.badgeRadius = 4.f;
             cell.contentView.badgeCenterOffset = CGPointMake(-100, 30);
             [cell.contentView showBadge];
         }
             break;
         case WBadgeStyleNumber:
         {
-            [cell.contentView showNumberBadgeWithValue:indexPath.row];
+            [cell.contentView showBadgeWithStyle:WBadgeStyleNumber value:@(indexPath.row) animationType:WBadgeAnimTypeNone];
             cell.contentView.badgeCenterOffset = CGPointMake(-100, 30);
         }
             break;
-        case WBadgeStyleNew:
+        case WBadgeStyleText:
         {
-            [cell.contentView showBadgeWithStyle:WBadgeStyleNew value:0 animationType:WBadgeAnimTypeNone];
+            [cell.contentView showBadgeWithStyle:WBadgeStyleText value:@"new" animationType:WBadgeAnimTypeNone];
             cell.contentView.badgeCenterOffset = CGPointMake(-100, 30);
         }
             break;

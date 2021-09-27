@@ -23,8 +23,8 @@
 		19C18C511B3AAEBA00BD63D2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19C18C501B3AAEBA00BD63D2 /* Images.xcassets */; };
 		19C18C601B3AAEBA00BD63D2 /* WZLBadgeDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 19C18C5F1B3AAEBA00BD63D2 /* WZLBadgeDemoTests.m */; };
 		19C18C7B1B42496700BD63D2 /* logo@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 19C18C7A1B42496700BD63D2 /* logo@2x.jpg */; };
-		A2BB80901B7BA5FA00373C78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19C18C4D1B3AAEBA00BD63D2 /* Main.storyboard */; };
 		A2BB80911B7BA5FA00373C78 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19C18C521B3AAEBA00BD63D2 /* LaunchScreen.xib */; };
+		B79C0AF72701778B008CF302 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B79C0AF62701778B008CF302 /* Main.storyboard */; };
 		DC040FB11EF7CB0B000B69A3 /* TableViewCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC040FB01EF7CB0B000B69A3 /* TableViewCollectionViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -65,13 +65,13 @@
 		19C18C481B3AAEBA00BD63D2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		19C18C4A1B3AAEBA00BD63D2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		19C18C4B1B3AAEBA00BD63D2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		19C18C4E1B3AAEBA00BD63D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		19C18C501B3AAEBA00BD63D2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		19C18C531B3AAEBA00BD63D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		19C18C591B3AAEBA00BD63D2 /* WZLBadgeDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WZLBadgeDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19C18C5E1B3AAEBA00BD63D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19C18C5F1B3AAEBA00BD63D2 /* WZLBadgeDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WZLBadgeDemoTests.m; sourceTree = "<group>"; };
 		19C18C7A1B42496700BD63D2 /* logo@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "logo@2x.jpg"; sourceTree = "<group>"; };
+		B79C0AF62701778B008CF302 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DC040FAF1EF7CB0B000B69A3 /* TableViewCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCollectionViewController.h; sourceTree = "<group>"; };
 		DC040FB01EF7CB0B000B69A3 /* TableViewCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCollectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,7 +188,7 @@
 				196860031B78AB4A00AD10C2 /* WZLBadge */,
 				19C18C471B3AAEBA00BD63D2 /* AppDelegate.h */,
 				19C18C481B3AAEBA00BD63D2 /* AppDelegate.m */,
-				19C18C4D1B3AAEBA00BD63D2 /* Main.storyboard */,
+				B79C0AF62701778B008CF302 /* Main.storyboard */,
 				19AD4E7D1BB3D0610059AA66 /* RootTabBarController.h */,
 				19AD4E7E1BB3D0610059AA66 /* RootTabBarController.m */,
 				19C18C4A1B3AAEBA00BD63D2 /* ViewController.h */,
@@ -303,6 +303,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -323,10 +324,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2BB80901B7BA5FA00373C78 /* Main.storyboard in Resources */,
 				A2BB80911B7BA5FA00373C78 /* LaunchScreen.xib in Resources */,
 				19C18C7B1B42496700BD63D2 /* logo@2x.jpg in Resources */,
 				19784AF11B4BC59C00FEA91C /* Default-568h@2x.png in Resources */,
+				B79C0AF72701778B008CF302 /* Main.storyboard in Resources */,
 				19685FF71B7898E600AD10C2 /* nav_list@2x.png in Resources */,
 				19C18C511B3AAEBA00BD63D2 /* Images.xcassets in Resources */,
 			);
@@ -379,14 +380,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		19C18C4D1B3AAEBA00BD63D2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				19C18C4E1B3AAEBA00BD63D2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		19C18C521B3AAEBA00BD63D2 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -435,7 +428,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -473,7 +466,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -486,12 +479,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2021092711;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/user/Desktop/Git/WuJieCaoJoke/WuJieCaoJoke/ThirdPart/ThirdPlatform/UMeng/umeng_ios_social_sdk_4.2.3_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI,
 				);
 				INFOPLIST_FILE = WZLBadgeDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -511,6 +505,7 @@
 					/Users/user/Desktop/Git/WuJieCaoJoke/WuJieCaoJoke/ThirdPart/ThirdPlatform/UMeng/UMessage_Sdk_1.1.0,
 					/Users/user/Desktop/Git/WuJieCaoJoke/WuJieCaoJoke/ThirdPart/ThirdPlatform/YouMi/lib,
 				);
+				MARKETING_VERSION = 1.2.6;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -523,12 +518,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2021092711;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/user/Desktop/Git/WuJieCaoJoke/WuJieCaoJoke/ThirdPart/ThirdPlatform/UMeng/umeng_ios_social_sdk_4.2.3_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI,
 				);
 				INFOPLIST_FILE = WZLBadgeDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -548,6 +544,7 @@
 					/Users/user/Desktop/Git/WuJieCaoJoke/WuJieCaoJoke/ThirdPart/ThirdPlatform/UMeng/UMessage_Sdk_1.1.0,
 					/Users/user/Desktop/Git/WuJieCaoJoke/WuJieCaoJoke/ThirdPart/ThirdPlatform/YouMi/lib,
 				);
+				MARKETING_VERSION = 1.2.6;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

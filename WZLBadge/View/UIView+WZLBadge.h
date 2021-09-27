@@ -23,23 +23,14 @@
  *  showBadge
  *
  *  @param style WBadgeStyle type
- *  @param value (if 'style' is WBadgeStyleRedDot or WBadgeStyleNew,
-        this value will be ignored. In this case, any value will be ok.)
-*   @param aniType
+ *  @param value
+ *  @param aniType
+ *
  */
 - (void)showBadgeWithStyle:(WBadgeStyle)style
-                     value:(NSInteger)value
+                     value:(id)value
              animationType:(WBadgeAnimType)aniType;
 
-/*
- wBadgeStyle default is WBadgeStyleNumber
- */
-- (void)showNumberBadgeWithValue:(NSInteger)value
-              animationType:(WBadgeAnimType)aniType;
-
-// wBadgeStyle default is WBadgeStyleNumber ;
-// WBadgeAnimType defualt is  WBadgeAnimTypeNone
-- (void)showNumberBadgeWithValue:(NSInteger)value;
 
 /**
  *  clear badge(hide badge)
